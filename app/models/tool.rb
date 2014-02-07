@@ -4,6 +4,7 @@ class Tool < ActiveRecord::Base
   belongs_to :user
 
   validates_uniqueness_of :id
+  validates :name, presence: true
 
   scope :shop, :conditions => { :user_id => 1 }
 

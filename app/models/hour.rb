@@ -4,4 +4,6 @@ class Hour < ActiveRecord::Base
   belongs_to :user
 
   default_scope order: 'hours.date DESC'
+  validates :date, :total, :jobsite_id, presence: true
+  validates :total, numericality: { only_integer: true }
 end

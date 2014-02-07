@@ -4,7 +4,10 @@ class Jobsite < ActiveRecord::Base
   has_many :hours
   has_many :users, through: :hours
 
+  validates :jobno, :name, presence: true
   validates_uniqueness_of :jobno
+  validates_associated :tools
+  validates_associated :hours
 
   scope :active, :conditions => { :active => true }
   default_scope order ('start DESC')
