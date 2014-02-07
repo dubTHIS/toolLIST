@@ -6,7 +6,7 @@ gem 'webrick', '1.3.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
-	gem 'sqlite3'
+	gem 'sqlite3', '1.3.8'
 end
 
 group :production do

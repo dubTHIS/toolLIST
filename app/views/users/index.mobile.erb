@@ -1,0 +1,26 @@
+<table data-role="table" id="my-table" data-mode="reflow" class="ui-group-theme-a ui-responsive table-stroke">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Personal #</th>
+            <th>Work #</th>
+            <th>Email Address</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+        <tr>
+        <td><%= user.name %></td>
+        <td><%= user.personal_phone %></td>
+        <td><%= user.work_phone %></td>
+        <td><% if user.email.include? "none" %>
+        		
+        	<% else	%>
+        		<%= user.email %>
+        	<% end %></td>
+        <td><%= link_to 'Show', user %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

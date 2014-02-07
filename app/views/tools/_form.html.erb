@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label "Category" %>
-    <%= select_tag(:category, options_for_select([['Step Ladders', 1], ['Extension Ladders', 2], ['Job Boxes', 3], ['Hilti Drills', 4], ['Drills', 5], ['Miscellaneous', 6], ['Heavy Machinery', 7]])) %>
+    <%= f.select :category, [['Step Ladders', 1], ['Extension Ladders', 2], ['Job Boxes', 3], ['Hilti Drills', 4], ['Drills', 5], ['Miscellaneous', 6], ['Heavy Machinery', 7]] %>
   </div>
   <div class="field">
     <%= f.label "Job #" %><br />
@@ -39,6 +39,7 @@
 
     <%= link_to 'View all jobsites', list_jobsites_path, :class => "btn btn-default btn-sm btn-info" %>
   </div>
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>
