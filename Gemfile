@@ -5,8 +5,14 @@ gem 'webrick', '1.3.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development do
+	gem 'sqlite3'
+end
 
-gem 'sqlite3'
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
+end
 
 gem 'devise'
 
