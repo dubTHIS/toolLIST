@@ -16,9 +16,10 @@ class ToolsController < ApplicationController
     search_id = params[:search_id].to_i
     search_name = params[:search_name]
 
-    if condition === 1
+    if condition === 0
+      @tools = current_user.tools
+    elsif condition === 1
       @tools = Tool.where("category = 1")
-      puts @tools
     elsif  condition === 2
       @tools = Tool.where("category = 2")
     elsif condition === 3

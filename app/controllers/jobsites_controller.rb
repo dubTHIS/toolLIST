@@ -14,13 +14,19 @@ class JobsitesController < ApplicationController
 
   # GET /jobsites/list
   def list
+    condition = params[:condition].to_i
+
     unless params[:search_jobno].nil?
       @jobsites = Jobsite.search_jobno(params[:search_jobno])
     else 
       unless params[:search_name].nil?
         @jobsites = Jobsite.search_name(params[:search_name])
       else
-        @jobsites = Jobsite.all
+        if condition == 1
+          @jobsites = current_user.jobsites
+        else
+         @jobsites = Jobsite.all
+        end
       end
     end
 

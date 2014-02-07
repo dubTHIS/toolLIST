@@ -9,6 +9,7 @@
     <%= text_field_tag :search_name, params[:search_name], :class => "form-control" %>
     <%= submit_tag "Search Name", :name => nil, :class => "btn btn-default" %>
 <% end %>
+<br />
 <div class="panel panel-default">
     <div class="panel-heading">Listing all active jobsites</div>
     <div class ="table-responsive">
@@ -44,3 +45,5 @@
 <%= link_to 'New Jobsite', new_jobsite_path, :class => "btn btn-default btn-lg btn-primary" %>
 
 <%= link_to 'View all jobsites', list_jobsites_path, :class => "btn btn-default btn-lg btn-info" %>
+
+<%= link_to 'View my jobsites', list_jobsites_path(:condition => 1), :class => "btn btn-default btn-lg btn-info" %>

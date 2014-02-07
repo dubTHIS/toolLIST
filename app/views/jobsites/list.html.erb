@@ -43,3 +43,5 @@
 <%= link_to 'New Jobsite', new_jobsite_path, :class => "btn btn-default btn-lg btn-primary" %>
 
 <%= link_to 'View only active jobsites', jobsites_path, :class => "btn btn-default btn-lg btn-info" %>
+
+<%= link_to 'View my jobsites', list_jobsites_path(:condition => 1), :class => "btn btn-default btn-lg btn-info" %>

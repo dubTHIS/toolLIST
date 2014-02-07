@@ -69,7 +69,7 @@
 
   <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">My tools</div>
+      <div class="panel-heading"><b>My tools</b><%= link_to 'View all of my tools', list_tools_path(:condition => 0), :class => "btn btn-sm btn-primary pull-right" %></div>
       <div class ="table-responsive">
           <table class="table table-condensed">
             <tr>
@@ -80,7 +80,7 @@
               <th></th>
             </tr>
 
-          <% current_user.tools.each do |tool| %>
+          <% current_user.tools[0..4].each do |tool| %>
             <tr <% if tool.user.name == "SHOP" %> class="btn-warning" <% else %> class="btn-default" <% end %>>
               <td><%= tool.id %></td>
               <td><%= tool.name %></td>
@@ -94,7 +94,7 @@
     </div>
     <br />
     <div class="panel panel-default">
-      <div class="panel-heading">My Jobsites</div>
+      <div class="panel-heading">My Jobsites<%= link_to 'View all of my jobsites', list_jobsites_path(:condition => 1), :class => "btn btn-sm btn-info pull-right" %></div>
       <div class ="table-responsive">
           <table class="table table-condensed">
             <tr>
@@ -104,7 +104,7 @@
               <th></th>
             </tr>
 
-          <% current_user.jobsites.uniq.each do |job| %>
+          <% current_user.jobsites.uniq[0..4].each do |job| %>
             <tr>
               <td><%= job.jobno %></td>
               <td><%= job.name %></td>
