@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  jobno: 1
+  name: MyString
+  location: MyString
+  active: false
+  start: 2013-11-29 15:27:06
+  end: 2013-11-29 15:27:06
+
+two:
+  jobno: 1
+  name: MyString
+  location: MyString
+  active: false
+  start: 2013-11-29 15:27:06
+  end: 2013-11-29 15:27:06

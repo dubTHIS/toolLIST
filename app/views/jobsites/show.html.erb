@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="well col-md-6">
+    <p>
+      <b>Jobno:</b>
+      <%= @jobsite.jobno %>
+    </p>
+
+    <p>
+      <b>Name:</b>
+      <%= @jobsite.name %>
+    </p>
+
+    <p>
+      <b>Location:</b>
+      <%= @jobsite.location %>
+    </p>
+
+    <p>
+      <b>Active:</b>
+      <%= @jobsite.active %>
+    </p>
+
+    <p>
+      <b>Start:</b>
+      <%= @jobsite.start %>
+    </p>
+
+    <p>
+      <b>End:</b>
+      <%= @jobsite.end %>
+    </p>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Listing all tools on site</div>
+      <div class ="table-responsive">
+          <table class="table table-condensed">
+            <tr>
+              <th>ID #</th>
+              <th>Name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% @jobsite.tools.each do |tool| %>
+            <tr <% if tool.user.name == "SHOP" %> class="btn-warning" <% else %> class="btn-default" <% end %>>
+              <td><%= tool.id %></td>
+              <td><%= tool.name %></td>
+              <td><%= link_to 'Show', tool %></td>
+              <% if tool.user.id == current_user.id || current_user.admin? %>
+                <td><%= link_to 'Edit', edit_tool_path(tool) %></td>
+                <td><%= link_to 'Destroy', tool, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <br />
+    <div class="panel panel-default">
+      <div class="panel-heading">Listing all people who have worked on site</div>
+      <div class ="table-responsive">
+          <table class="table table-condensed">
+            <tr>
+              <th>Name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% @jobsite.users.uniq.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= link_to 'Show', user %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+<% if !@jobsite.users.nil? && (@jobsite.users.include? current_user) || current_user.admin? %>
+  <%= link_to 'Edit', edit_jobsite_path(@jobsite) %>
+<% end %>
+<%= link_to 'Back', jobsites_path %>

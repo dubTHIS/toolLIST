@@ -1,0 +1,60 @@
+<%= form_tag list_tools_path, :method => 'get', :class => "form-inline" do %>
+    <div class="form-group">
+      <%= text_field_tag :search_id, params[:search_id], :class => "form-control" %>
+      <%= submit_tag "Search ID", :name => nil, :class => "btn btn-default" %>
+    </div>
+<% end %>
+<br />
+<%= form_tag list_tools_path, :method => 'get', :class => "form-inline" do %>
+    <%= text_field_tag :search_name, params[:search_name], :class => "form-control" %>
+    <%= submit_tag "Search Name", :name => nil, :class => "btn btn-default" %>
+<% end %>
+<br />
+<div class="btn-group">
+  <%= link_to 'All Tools', tools_path, :class => "btn btn-info" %>
+  <%= link_to 'Step Ladders', list_tools_path(:condition => 1), :class => "btn btn-default" %>
+  <%= link_to 'Extension Ladders', list_tools_path(:condition => 2), :class => "btn btn-default" %>
+  <%= link_to 'Job Boxes', list_tools_path(:condition => 3), :class => "btn btn-default" %>
+  <%= link_to 'Hilti Drills', list_tools_path(:condition => 4), :class => "btn btn-default" %>
+  <%= link_to 'Drills', list_tools_path(:condition => 5), :class => "btn btn-default" %>
+  <%= link_to 'Miscellaneous', list_tools_path(:condition => 6), :class => "btn btn-default" %>
+  <%= link_to 'Heavy Machinery', list_tools_path(:condition => 7), :class => "btn btn-default" %>
+  <%= link_to 'View all tools at the shop', list_tools_path(:condition => 8), :class => "btn btn-warning" %>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Listing all tools at the shop</div>
+    <div class ="table-responsive">
+        <table class="table table-condensed">
+          <tr>
+            <th>ID #</th>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>Jobsite</th>
+            <th>Condition</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @tools.each do |tool| %>
+          <tr <% if tool.user.name == "SHOP" %> class="warning" <% else %> class="btn-default" <% end %>>
+            <td><%= tool.id %></td>
+            <td><%= tool.name %></td>
+            <td><%= tool.user.name %></td>
+            <td><%= tool.jobsite.jobno + " - " + tool.jobsite.name %></td>
+            <td<% if tool.condition == true %> class="success">Working <% else %> class="danger">NFG<% end %></td>
+            <td><%= category_name(tool.category) %></td>
+            <td><%= link_to 'Show', tool %></td>
+            <% if tool.user.id == current_user.id || current_user.admin? %>
+              <td><%= link_to 'Edit', edit_tool_path(tool) %></td>
+              <td><%= link_to 'Destroy', tool, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </table>
+    </div>
+</div>
+<br />
+
+<%= link_to 'New Tool', new_tool_path,  :class => "btn btn-default btn-lg btn-primary" %>

@@ -1,0 +1,45 @@
+<%= form_for(@tool) do |f| %>
+  <% if @tool.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tool.errors.count, "error") %> prohibited this tool from being saved:</h2>
+
+      <ul>
+      <% @tool.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label "Working" %>
+    <%= f.check_box :condition %>
+  </div>
+  <div class="field">
+    <%= f.label "Category" %>
+    <%= select_tag(:category, options_for_select([['Step Ladders', 1], ['Extension Ladders', 2], ['Job Boxes', 3], ['Hilti Drills', 4], ['Drills', 5], ['Miscellaneous', 6], ['Heavy Machinery', 7]])) %>
+  </div>
+  <div class="field">
+    <%= f.label "Job #" %><br />
+    <%= f.collection_select(:jobsite_id, @jobs, :id, :jobno) %><br />
+    <i>Don't see your jobsite? Maybe it isn't created yet or maybe or it isn't active:</i><br />
+    <%= link_to 'New Jobsite', new_jobsite_path, :class => "btn btn-default btn-sm btn-primary" %>
+
+    <%= link_to 'View all jobsites', list_jobsites_path, :class => "btn btn-default btn-sm btn-info" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"><h2>Time Card</h2><h3><%= link_to "<", date2: @date2.prev_week %>
+  <%= @first.to_formatted_s(:long) + ' - ' + @last.to_formatted_s(:long) %>
+  <%= link_to ">", date2: @date2.next_week %></h3></div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <tr>
+            <th>Saturday</th>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+          </tr>
+          <tr>
+            <% @week.each do |day| %>
+              <td>
+                <%= day.to_formatted_s(:long) %>
+                <% if @hours_by_date[day] %>
+                  <ul class="list-group">
+                    <% @hours_by_date[day].each do |hour| %>
+                      <li class="list-group-item"><%= link_to hour.jobsite.jobno + ' - ' + hour.total.to_s, hour %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+                <br />
+                <%= link_to 'Enter Hours', new_hour_path(:date => day), :class => "btn btn-deault btn-sm" %>
+              </td>
+            <% end %>
+          </tr>
+          <tr><td colspan=7 ><%= "Total = " + @total.to_s %></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  <br />
+<div class="row">
+  <div class= "col-md-8">
+  <%= link_to 'New Hour', new_hour_path %>
+    <div id="events">
+      <h2 id="month">
+        <%= link_to "<", date: @date.prev_month %>
+        <%= @date.strftime("%B %Y") %>
+        <%= link_to ">", date: @date.next_month %>
+      </h2>
+      <div class="table-responsive">
+        <%= calendar @date do |date| %>
+            <div id="filler">
+            <div id="daylink"><%= date.day %></div>
+            <% if @hours_by_date[date] %>
+
+              <ul>
+                <% @hours_by_date[date].each do |hour| %>
+                  <li><%= link_to hour.jobsite.name + ' - ' + hour.total.to_s, hour %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">My tools</div>
+      <div class ="table-responsive">
+          <table class="table table-condensed">
+            <tr>
+              <th>ID #</th>
+              <th>Name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% current_user.tools.each do |tool| %>
+            <tr <% if tool.user.name == "SHOP" %> class="btn-warning" <% else %> class="btn-default" <% end %>>
+              <td><%= tool.id %></td>
+              <td><%= tool.name %></td>
+              <td><%= link_to 'Show', tool %></td>
+              <td><%= link_to 'Edit', edit_tool_path(tool) %></td>
+              <td><%= link_to 'Destroy', tool, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <br />
+    <div class="panel panel-default">
+      <div class="panel-heading">My Jobsites</div>
+      <div class ="table-responsive">
+          <table class="table table-condensed">
+            <tr>
+              <th>Job No</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th></th>
+            </tr>
+
+          <% current_user.jobsites.uniq.each do |job| %>
+            <tr>
+              <td><%= job.jobno %></td>
+              <td><%= job.name %></td>
+              <td><%= job.location %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+</div>
+
+

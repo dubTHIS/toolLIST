@@ -1,0 +1,37 @@
+<h2 id="week">
+	<%= link_to "<", date: @date.prev_week %>
+	<%= @first.to_formatted_s(:long) + ' - ' + @last.to_formatted_s(:long) %>
+	<%= link_to ">", date: @date.next_week %>
+</h2>
+
+<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>Employee</th>
+			<th>Saturday</th>
+			<th>Sunday</th>
+			<th>Monday</th>
+			<th>Tuesday</th>
+			<th>Wednesday</th>
+			<th>Thursday</th>
+			<th>Friday</th>
+			<th>TOTAL</th>
+		</tr>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.name%></td>
+				<% @week.each do |day| %>
+              		<td>
+              			<ul class="list-group">
+              			<% get_hours_date(user.id, day).each do |hour| %>
+              				<li class="list-group-item"><%= link_to hour.jobsite.jobno + ' - ' + hour.total.to_s, hour %></li>
+                   		<% end %>
+                   		</ul>
+                   	</td>
+                <% end %>
+                <td><%= get_total_hours(user.id, @date) %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+

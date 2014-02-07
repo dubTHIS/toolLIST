@@ -1,0 +1,57 @@
+// Place all the styles related to the Hours controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.calendar {
+  border-collapse: separate;
+  border-spacing: 8px;
+  width: 100%;
+
+  td, th {
+    font-family: "Lucida Grande", arial, helvetica, sans-serif;
+    font-size: 10px;
+    padding: 6px;
+    text-transform: uppercase;
+  }
+
+  th {
+    border-bottom: 1px solid #C50C23;
+    color: #666;
+    text-align: left;
+    width: 14.2857142857143%;
+  }
+
+  td {
+    box-shadow: -2px -2px 2px #BFBAB0;
+    background: #FFF;
+    color: #777;
+    height: 80px;
+    vertical-align: top;
+    font-size: 16px;
+  }
+
+  .notmonth, .notmonth a { color: #CCC; }
+  .notmonth { 
+    background-color: #DDD; 
+    box-shadow: 2px 2px 2px #BFBAB0;
+  }
+  .today { background-color: #D7F2FF; }
+}
+
+#events #month {
+  margin: 0;
+  padding-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 26px;
+  a {
+    text-decoration: none;
+    padding: 0 10px;
+    color: #999;
+  }
+}
+
+#events ul {
+  font-size: 11px;
+  list-style-type: none;
+  padding: 0;
+}

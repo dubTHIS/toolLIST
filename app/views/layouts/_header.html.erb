@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag("logo1.png", :border=>0, :class=>'logo'), root_path, :class=>"navbar-brand" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<% if user_signed_in? %>
+        	<li><%= link_to "Tools", tools_path %></li>
+        	<li><%= link_to "Jobsites", jobsites_path %></li>
+          <li><%= link_to "Employees", users_path %></li>
+	        <li class="bg-info"><%= link_to "Add New Hours", new_hour_path %></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<% if user_signed_in? %>
+          <li><%= link_to "FAQ", help_path %></li>
+      		<% if current_user.admin? %>
+        		<li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Panel<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "NFG Tools", list_tools_path(:condition => 9) %></li>
+              <li><%= link_to "Hours", list_hours_path %></li>
+            </ul>
+          </li>
+    		<% end %>
+    	<% end %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><% if user_signed_in? %><%= current_user.name %><% else %>Login<% end %><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <% if user_signed_in? %>
+			    <li><%= link_to "Log Out", logout_path %></li>
+	    	<% else %>
+	    		<li><%= link_to "Register", register_path %></li>
+	    		<li><%= link_to "Login", login_path %></li>
+	    	<% end %>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

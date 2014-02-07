@@ -1,0 +1,52 @@
+<div class="well">
+  <p>
+    <b>Name:</b>
+    <%= @tool.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @tool.description %>
+  </p>
+
+  <p>
+    <b>Id:</b>
+    <%= @tool.id %>
+  </p>
+
+  <p>
+    <b>Owner:</b>
+    <%= @tool.user.name %>
+  </p>
+
+  <p>
+    <b>Jobsite:</b>
+    <%= @tool.jobsite.jobno + " - " + @tool.jobsite.name %>
+  </p>
+
+  <p>
+    <b>Condition:</b>
+    <% if @tool.condition %>
+      Working
+    <% else %>
+      NFG
+    <% end %>
+  </p>
+
+  <p>
+    <b>Category:</b>
+    <%= category_name(@tool.category) %>
+  </p>
+</div>
+<div>
+  <% if @tool.user.id == current_user.id || current_user.admin? %>
+    <%= link_to 'Return to shop', return_tools_path(:id => @tool.id), :class => "btn btn-lg bt-primary" %><br />
+    <%= link_to 'Edit', edit_tool_path(@tool), :class => "btn btn-lg bt-warning" %>
+  <% elsif @tool.user.id == shop_user_id %>
+    <%= link_to 'Edit', edit_tool_path(@tool), :class => "btn btn-lg bt-warning" %>
+  <% else %>
+    <p>You are not the owner of this tool</p>
+
+  <% end %>
+
+<%= link_to 'Back', tools_path %>

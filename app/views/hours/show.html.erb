@@ -1,0 +1,23 @@
+<p>
+  <b>Date:</b>
+  <%= @hour.date %>
+</p>
+
+<p>
+  <b>Total:</b>
+  <%= @hour.total %>
+</p>
+
+<p>
+	<b>Employee:</b>
+	<%= @hour.user.name %>
+</p>
+
+<p>
+	<b>Jobsite:</b>
+	<%= @hour.jobsite.jobno + " - " + @hour.jobsite.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_hour_path(@hour) %> |
+<%= link_to 'Back', hours_path %>

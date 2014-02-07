@@ -1,0 +1,46 @@
+<%= form_tag list_jobsites_path, :method => 'get', :class => "form-inline" do %>
+    <div class="form-group">
+      <%= text_field_tag :search_jobno, params[:search_jobno], :class => "form-control" %>
+      <%= submit_tag "Search Job #", :name => nil, :class => "btn btn-default" %>
+    </div>
+<% end %>
+<br />
+<%= form_tag list_jobsites_path, :method => 'get', :class => "form-inline" do %>
+    <%= text_field_tag :search_name, params[:search_name], :class => "form-control" %>
+    <%= submit_tag "Search Name", :name => nil, :class => "btn btn-default" %>
+<% end %>
+<div class="panel panel-default">
+    <div class="panel-heading">Listing all active jobsites</div>
+    <div class ="table-responsive">
+        <table class="table table-condensed">
+          <tr>
+            <th>Jobno</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Start</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @jobsites.each do |jobsite| %>
+          <tr <% if jobsite.active? %> class="btn-success" <% else %> class="btn-danger" <% end %>>
+            <td><%= jobsite.jobno %></td>
+            <td><%= jobsite.name %></td>
+            <td><%= jobsite.location %></td>
+            <td><%= jobsite.start %></td>
+            <td><%= link_to 'Show', jobsite %></td>
+            <% if !jobsite.users.nil? && (jobsite.users.include? current_user) || current_user.admin? %>
+              <td><%= link_to 'Edit', edit_jobsite_path(jobsite) %></td>
+              <td><%= link_to 'Destroy', jobsite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </table>
+    </div>
+</div>
+<br />
+
+<%= link_to 'New Jobsite', new_jobsite_path, :class => "btn btn-default btn-lg btn-primary" %>
+
+<%= link_to 'View all jobsites', list_jobsites_path, :class => "btn btn-default btn-lg btn-info" %>

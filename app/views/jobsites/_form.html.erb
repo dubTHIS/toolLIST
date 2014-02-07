@@ -1,0 +1,46 @@
+<%= form_for(@jobsite) do |f| %>
+  <% if @jobsite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jobsite.errors.count, "error") %> prohibited this jobsite from being saved:</h2>
+
+      <ul>
+      <% @jobsite.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :jobno %><br />
+    <%= f.text_field :jobno %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active%>
+    <i>If you deactivate a job all assigned tools go back to the shop</i>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br />
+    <%= f.datetime_select :end %>
+  </div>
+  <div class="field">
+    <%= f.label "hours of operation"%><br />
+    <%= f.text_field :hrs_of_op %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
